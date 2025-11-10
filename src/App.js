@@ -18,12 +18,16 @@ function App() {
     setTasks(tasks.filter((_,index)=> index !== indexToDelete))
   }
 
+  function handleUpdate(indexToUpdate,updatedTask){
+    setTasks(tasks.map((task,index)=> index === indexToUpdate ? updatedTask : task ))
+  }
+
   return (
     <div className='container'>
       <Wrapper>
         <Header />
         <Form handleSubmit={handleSubmit} />
-        <ListItems handleDelete={handleDelete} tasks={tasks} />
+        <ListItems handleDelete={handleDelete} handleUpdate={handleUpdate} tasks={tasks} />
       </Wrapper>
     </div>
   );
