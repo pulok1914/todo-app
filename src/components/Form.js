@@ -13,7 +13,7 @@ function Form({handleSubmit}) {
 
     return(
         <form className="todo-form" onSubmit={onSubmit}>
-            <label className="todo-form-label" htmlFor="task" name="task">
+            <label className="todo-form-label" htmlFor="task">
                 <input value={newTask} className="todo-form-input" id="task" type="text" placeholder="create task here" onChange={e=>setNewTask(e.target.value)} />
             </label>
             <button type="submit" className="todo-btn">Create</button>

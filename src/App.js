@@ -8,10 +8,14 @@ import { useState } from "react";
 
 
 function App() {
-  const [tasks,setTasks] = useState(["List Item one", "List Item two", "List Item three"])
+  const [tasks,setTasks] = useState([
+      {text: "List Item one", completed: false}, 
+      {text: "List Item two", completed: false},
+      {text: "List Item three", completed: false}
+    ])
 
   function handleSubmit(newTask){
-    setTasks([...tasks, newTask])
+    setTasks([...tasks, {text: newTask, completed: false}])
   }
 
   function handleDelete(indexToDelete) {
@@ -19,7 +23,11 @@ function App() {
   }
 
   function handleUpdate(indexToUpdate,updatedTask){
-    setTasks(tasks.map((task,index)=> index === indexToUpdate ? updatedTask : task ))
+    setTasks(tasks.map((task,index)=> index === indexToUpdate ? {...task, text: updatedTask} : task ))
+  }
+
+  function toggleComplete(itemIndex){
+    setTasks(tasks.map((task,index)=> index === itemIndex? {...task, completed: !task.completed}: task))
   }
 
   return (
@@ -27,7 +35,7 @@ function App() {
       <Wrapper>
         <Header />
         <Form handleSubmit={handleSubmit} />
-        <ListItems handleDelete={handleDelete} handleUpdate={handleUpdate} tasks={tasks} />
+        <ListItems handleDelete={handleDelete} handleUpdate={handleUpdate} toggleComplete={toggleComplete} tasks={tasks} />
       </Wrapper>
     </div>
   );
