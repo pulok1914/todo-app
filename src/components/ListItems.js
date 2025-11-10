@@ -1,9 +1,16 @@
-function ListItems(){
+function ListItems(props){
     return(
         <ul className="todo-items">
-            <li className="todo-item"><p className="todo-text">List One</p><button className="todo-btn">Delete</button></li>
-            <li className="todo-item"><p className="todo-text">List One</p><button className="todo-btn">Delete</button></li>
+            {props.tasks.map((task,index)=><Item key={task} task={task} onDelete={()=> props.handleDelete(index)} />)}
+            
         </ul>
+    )
+}
+
+function Item(props) {
+    return(
+        <li className="todo-item"><p className="todo-text">{props.task}</p>
+        <button onClick={props.onDelete} className="todo-btn">Delete</button></li>
     )
 }
 

@@ -1,10 +1,22 @@
-function Form() {
+import { useState } from "react";
+
+function Form({handleSubmit}) {
+    const [newTask,setNewTask] = useState("")
+
+    function onSubmit(e){
+        e.preventDefault()
+        if(newTask.trim() !==""){
+            handleSubmit(newTask)
+        }
+        setNewTask("")
+    }
+
     return(
-        <form className="todo-form">
-            <label className="todo-form-label" for="task" name="task">
-                <input className="todo-form-input" id="task" type="text" placeholder="create task here" />
+        <form className="todo-form" onSubmit={onSubmit}>
+            <label className="todo-form-label" htmlFor="task" name="task">
+                <input value={newTask} className="todo-form-input" id="task" type="text" placeholder="create task here" onChange={e=>setNewTask(e.target.value)} />
             </label>
-            <button className="todo-btn">Create</button>
+            <button type="submit" className="todo-btn">Create</button>
         </form>
     )
 }
